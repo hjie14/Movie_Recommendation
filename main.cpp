@@ -9,6 +9,32 @@ string getRandomMovie(const vector<string>& movies){
   int r = rand() % movies.size();
   return movies[r];
 }
+char getYesNoInput(){
+  char input;
+  while (true){
+    cin >> input;
+    if (input == 'y' || input == 'Y' || input == 'n' || input == 'N'){
+      return input;
+    }
+    cout << "Invalid input. Please enter (y/n): ";
+    cin.clear();
+    cin.ignore(1000, '\n');
+  }
+}
+
+int getRatingInput(){
+  int rating;
+  while(true){
+    if (cin >> rating){
+      if (rating >= 0 && rating <= 5){
+        return rating;
+      }
+    }
+    cout << "Invalid rating. Enter a number between 0-5: ";
+    cin.clear();
+    cin.ignore(1000, '\n');
+  }
+}
 
 int main(){
 
@@ -95,17 +121,30 @@ int main(){
       cout << "Invalid choice. Please enter a number (1-5)." << endl;
       break;
   }
+  
+  if (choice >= 1 && choice <= 5){
+    cout << "Add this movie to your watchlist? (y/n): ";
+    char save = getYesNoInput();
+    if (save == 'y' || save == 'Y'){
+      watchlist.push_back(picked);
+      cout << "Saved to watchlist!" << endl;
+    }
 
-  char save;
-  cout << "Add this movie to your watchlist? (y/n): ";
-  cin >> save;
-  if (save == 'y' || save == 'Y') watchlist.push_back(picked);
-
-  int rating;
-  cout << "Rate this recommendation (1-5, or 0 to skip): ";
-  cin >> rating;
-  if(rating >=1 && rating <= 5) ratings.push_back(rating);
+    cout << "Rate this recommendation (1-5, or 0 to skip): ";
+    int rating = getRatingInput();
+    if (rating > 0) ratings.push_back(rating);
+  }
 
 } while (choice != 0);
 
+if (!watchlist.empty()){
+  cout << "Your Watchlist:" << endl;
+  for(auto &w : watchlist) cout << "- " << w << endl;
+}
+
+if (!ratings.empty()){
+  double sum = 0;
+  for (int r: ratings) sum += r;
+  cout << "Average rating: " << (sum/ratings.size()) << "/5" << endl;
+}
 }
