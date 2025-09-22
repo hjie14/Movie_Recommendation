@@ -5,32 +5,36 @@
 #include <ctime>
 using namespace std;
 
+// Function to randomly select a movie from a given lists of movies
 string getRandomMovie(const vector<string>& movies){
-  int r = rand() % movies.size();
-  return movies[r];
+  int r = rand() % movies.size(); // generate random index
+  return movies[r]; //return the movie at that index
 }
+
+// Function to validate yes/no input (only accepts 'y/Y' or 'n/N')
 char getYesNoInput(){
   char input;
   while (true){
     cin >> input;
     if (input == 'y' || input == 'Y' || input == 'n' || input == 'N'){
-      return input;
+      return input; // return valid input
     }
-    cout << "Invalid input. Please enter (y/n): ";
+    cout << "Invalid input. Please enter (y/n): "; // If input is invalid, ask again
     cin.clear();
     cin.ignore(1000, '\n');
   }
 }
 
+// Function to validate movie rating (only accepts numbers from 0-5)
 int getRatingInput(){
   int rating;
   while(true){
     if (cin >> rating){
       if (rating >= 0 && rating <= 5){
-        return rating;
+        return rating; //return valid rating
       }
     }
-    cout << "Invalid rating. Enter a number between 0-5: ";
+    cout << "Invalid rating. Enter a number between 0-5: "; // If rating is invalid, ask again.
     cin.clear();
     cin.ignore(1000, '\n');
   }
@@ -38,12 +42,13 @@ int getRatingInput(){
 
 int main(){
 
-  srand(static_cast<unsigned int>(time(nullptr)));
-  int choice;
-  int rating;
-  vector<string> watchlist;
-  vector<int> ratings;
+  srand(static_cast<unsigned int>(time(nullptr))); // seed random number generator
+  int choice; // choice variable
+  int rating; // rating variable
+  vector<string> watchlist; // stores saved movies
+  vector<int> ratings;  // stores ratings
 
+  // Movie categories
   vector<string> action ={
     "Extraction (2020) - A mercenary embarks on a rescue mission.",
     "Mad Max: Fury Road (2015) - Post-apocalyptic chase.",
@@ -74,6 +79,7 @@ int main(){
     "Bird Box (2018) - Survivors face unseen creatures that drive people to madness."
   };
 
+  // Display menu
   cout << "Welcome to the Netflix movie recommendation!" << endl;
   cout << "--------------------------------------------" << endl;
   cout << "Choose a movie genre" << endl;
@@ -83,11 +89,13 @@ int main(){
   cout << "4. Sci-fi" <<endl;
   cout << "5. Horror" <<endl;
   cout << "0. Exit" << endl;
+
+  // Loop until user choose '0' to exit program
   do{
   cout << "You chose: ";
   cin >> choice;
   
-  string picked;
+  string picked; // store the randomly picked movie
   switch (choice){
     case 1: 
       picked = getRandomMovie(action);
@@ -122,26 +130,31 @@ int main(){
       break;
   }
   
+  // If valid choice, allow saving to watchlist and rating
   if (choice >= 1 && choice <= 5){
-    cout << "Add this movie to your watchlist? (y/n): ";
+    // Ask if user want to save the movie into watchlist
+    cout << "Add this movie to your watchlist? (y/n): "; 
     char save = getYesNoInput();
     if (save == 'y' || save == 'Y'){
       watchlist.push_back(picked);
       cout << "Saved to watchlist!" << endl;
     }
 
+    // Ask user to rate the recommendation
     cout << "Rate this recommendation (1-5, or 0 to skip): ";
     int rating = getRatingInput();
     if (rating > 0) ratings.push_back(rating);
   }
 
-} while (choice != 0);
+} while (choice != 0); // repeat until exit
 
+// Display if watchlist is not empty
 if (!watchlist.empty()){
   cout << "Your Watchlist:" << endl;
   for(auto &w : watchlist) cout << "- " << w << endl;
 }
 
+// Display average rating if ratings exist
 if (!ratings.empty()){
   double sum = 0;
   for (int r: ratings) sum += r;
