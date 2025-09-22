@@ -1,0 +1,13 @@
+* 1b007f7 (HEAD -> main, origin/main) Added a error handling in movie menu choice also updated a few comments
+* 5c11f4d Added prompt if ratings is empty
+* ce5f780 Added prompt if watchlist is empty
+* 60c7c4d Added comment explaining the codes
+* c578ebc Added session summary, display watchlist and average rating also added error handling for input for rating and watchlist
+* e2f9c9b Added simple rating (1-5) to store user rating for recommendations
+* ca75a00 Added watchlist feature allowing to save currect movie recommendations
+* ce3941a Added randomized movie recommendations: multiple movies for each genre and getRandomMovie()
+* 60aac9d Added do while loop for multiple choice selection. Also added break in case 0 and default case
+* d671f94 Added switch case: Recommendations for each genre
+* f85349e Added genre list and input choice
+* 15b835e Program title added
+* 5bfa562 Initial code setup
