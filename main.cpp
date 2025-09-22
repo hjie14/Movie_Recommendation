@@ -154,6 +154,7 @@ if (!watchlist.empty()){
   for(auto &w : watchlist) cout << "- " << w << endl;
 }
 
+// Display if watchlist is empty
 if (watchlist.empty()){
   cout << "Your watchlist is empty." << endl;
 }
@@ -163,5 +164,9 @@ if (!ratings.empty()){
   double sum = 0;
   for (int r: ratings) sum += r;
   cout << "Average rating: " << (sum/ratings.size()) << "/5" << endl;
+}
+
+if (ratings.empty()){
+  cout << "You haven't rate any movies yet!" << endl;
 }
 }
