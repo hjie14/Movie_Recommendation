@@ -14,6 +14,7 @@ int main(){
 
   srand(static_cast<unsigned int>(time(nullptr)));
   int choice;
+  vector<string> watchlist;
 
   vector<string> action ={
     "Extraction (2020) - A mercenary embarks on a rescue mission.",
@@ -92,6 +93,12 @@ int main(){
       cout << "Invalid choice. Please enter a number (1-5)." << endl;
       break;
   }
+
+  char save;
+  cout << "Add this movie to your watchlist? (y/n): ";
+  cin >> save;
+  if (save == 'y' || save == 'Y') watchlist.push_back(picked);
+
 } while (choice != 0);
 
 }
