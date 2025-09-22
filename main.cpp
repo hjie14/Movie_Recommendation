@@ -150,8 +150,12 @@ int main(){
 
 // Display if watchlist is not empty
 if (!watchlist.empty()){
-  cout << "Your Watchlist:" << endl;
+  cout << "Your watchlist:" << endl;
   for(auto &w : watchlist) cout << "- " << w << endl;
+}
+
+if (watchlist.empty()){
+  cout << "Your watchlist is empty." << endl;
 }
 
 // Display average rating if ratings exist
