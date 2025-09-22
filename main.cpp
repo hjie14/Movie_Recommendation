@@ -20,8 +20,8 @@ char getYesNoInput(){
       return input; // return valid input
     }
     cout << "Invalid input. Please enter (y/n): "; // If input is invalid, ask again
-    cin.clear();
-    cin.ignore(1000, '\n');
+    cin.clear(); // clear error flag
+    cin.ignore(1000, '\n'); // discard bad input
   }
 }
 
@@ -35,8 +35,8 @@ int getRatingInput(){
       }
     }
     cout << "Invalid rating. Enter a number between 0-5: "; // If rating is invalid, ask again.
-    cin.clear();
-    cin.ignore(1000, '\n');
+    cin.clear(); // clear error flag
+    cin.ignore(1000, '\n'); // discard bad input
   }
 }
 
@@ -93,7 +93,12 @@ int main(){
   // Loop until user choose '0' to exit program
   do{
   cout << "You chose: ";
-  cin >> choice;
+  // If input is invalid, ask again
+  while(!(cin >> choice) || choice < 0 || choice > 5){
+    cout << "Invalid input. Please enter a number between 0-5: ";
+    cin.clear(); // clear error flag
+    cin.ignore(1000, '\n'); // discard bad input
+  }
   
   string picked; // store the randomly picked movie
   switch (choice){
