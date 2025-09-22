@@ -13,6 +13,7 @@ int main(){
   cout << "4. Sci-fi" <<endl;
   cout << "5. Horror" <<endl;
   cout << "0. Exit" << endl;
+  do{
   cout << "You chose: ";
   cin >> choice;
 
@@ -39,8 +40,11 @@ int main(){
       break;
       case 0: 
       cout << "Exiting program. Goodbye!" << endl;
+      break;
       default:
       cout << "Invalid choice. Please enter a number (1-5)." << endl;
+      break;
   }
-  
+} while (choice != 0);
+
 }
